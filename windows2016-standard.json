@@ -6,19 +6,20 @@
     },
     "builders": [
         {
-"ssh_host_port_min": "5985",
-"ssh_host_port_max": "5985",
             "type":                 "qemu",
 	    "format":"qcow2",
             "accelerator": "kvm",
             "communicator":         "winrm",
+"ssh_host_port_min": "5985",
+"ssh_host_port_max": "5985",
+            "headless":         true,
             "disk_size":            81440,
             "qemuargs": [
-                [ "-m", "8048M" ]
+                [ "-m", "8048M" ],
+		 [ "-cpu", "Westmere" ]
             ],
             "floppy_files": [
-                "Autounattend.xml",
-                "enable-winrm.ps1"
+                "Autounattend.xml"
             ],
             "iso_url":              "{{user `iso_path`}}",
             "iso_checksum_type":    "md5",
