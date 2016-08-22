@@ -1,38 +1,8 @@
-# Packer-Windows2016-Standard (TP5)
+Download TP5 via `curl -O http://care.dlservice.microsoft.com/dl/download/8/9/2/89284B3B-BA51-49C8-90F8-59C0A58D0E70/14300.1000.160324-1723.RS1_RELEASE_SVC_SERVER_OEMRET_X64FRE_EN-US.ISO`
 
-Makes a Windows Server 2016 x64 box for use with Virtualbox.
+Download Packer via `curl -O https://releases.hashicorp.com/packer/0.10.1/packer_0.10.1_linux_amd64.zip`
 
-Inspired by so many other repositories on GitHub.
 
-| Build	| Branch | Date |
-|---:|---|---|
-| 6.4.9841 | Technical Preview | October 2014 |
-| 10.0.10074 |	TP2	| May 2015 |
-| 10.0.10514 | TP 3	| August 2015 |
-| 10.0.10586 | TP 4 | November 2015 |
-| **10.0.14300** | **TP5** | **April 2016** |
+Repo port from https://github.com/lwieske/packer-windows2016-standard/ to run on KVM.
 
-```
-$ packer build -force -only=virtualbox-iso windows2016-standard.json
-
-$ vagrant box add --name windows2016-standard builds/windows2016-standard.virtualbox.box --force
-
-$ vagrant init windows2016-standard
-
-$ vagrant up
-```
-
-This repository is based on **Technical Preview 5 (TP5)** and the build does the following:
-
-* Autonunattend.xml
-  * update windows
-  * enable winrm
-* windows2016-standard.json
-  * restart windows
-    * enables rdp
-    * enables ssh
-    * installs guest tools
-  * restart windows
-    * installs packages
-    * does some tweaks
-    * compacts the drive
+Current Status: Broken. https://github.com/mitchellh/packer/issues/3820
