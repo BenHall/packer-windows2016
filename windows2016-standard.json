@@ -1,0 +1,58 @@
+{
+    "variables": {
+        "name":     "windows2016-standard",
+        "iso_path": "iso/14300.1000.160324-1723.RS1_RELEASE_SVC_SERVER_OEMRET_X64FRE_EN-US.ISO",
+        "iso_md5":  "6417ba460f95bd91ded05dfacd553783"
+    },
+    "builders": [
+        {
+"ssh_host_port_min": "5985",
+"ssh_host_port_max": "5985",
+            "type":                 "qemu",
+	    "format":"qcow2",
+            "accelerator": "kvm",
+            "communicator":         "winrm",
+            "disk_size":            81440,
+            "qemuargs": [
+                [ "-m", "8048M" ]
+            ],
+            "floppy_files": [
+                "Autounattend.xml",
+                "enable-winrm.ps1"
+            ],
+            "iso_url":              "{{user `iso_path`}}",
+            "iso_checksum_type":    "md5",
+            "iso_checksum":         "{{user `iso_md5`}}",
+            "winrm_username":       "vagrant",
+            "winrm_password":       "vagrant",
+            "winrm_timeout":        "6h",
+            "shutdown_command":     "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\""
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "windows-restart",
+            "restart_timeout": "30m"
+        },
+        {
+            "type": "powershell",
+            "execute_command": "powershell -ExecutionPolicy Bypass \"& { {{.Vars}}{{.Path}}; exit $LastExitCode}\"",
+            "scripts": [
+                "enable-rdp.ps1",
+                "guest-tools.ps1"
+            ]
+        },
+        {
+            "type": "windows-restart"
+        },
+        {
+            "type": "powershell",
+            "execute_command": "powershell -ExecutionPolicy Bypass \"& { {{.Vars}}{{.Path}}; exit $LastExitCode}\"",
+            "scripts": [
+                "install-pkgs.ps1",
+                "final-tweaks.ps1",
+                "compact.ps1"
+            ]
+        }
+    ]
+}
