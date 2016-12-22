@@ -16,7 +16,7 @@
             "disk_size":            81440,
             "qemuargs": [
                 [ "-m", "8048M" ],
-		 [ "-cpu", "host" ]
+		 [ "-cpu", "Westmere" ]
             ],
             "floppy_files": [
                 "Autounattend.xml"
