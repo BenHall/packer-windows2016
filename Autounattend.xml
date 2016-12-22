@@ -115,6 +115,15 @@
                 <NetworkLocation>Home</NetworkLocation>
                 <ProtectYourPC>1</ProtectYourPC>
             </OOBE>
+            <FirstLogonCommands>		
+		
+                <SynchronousCommand wcm:action="add">		
+                    <CommandLine>powershell -NoLogo -ExecutionPolicy RemoteSigned -File a:\enable-winrm.ps1</CommandLine>		
+                    <Description>enable winrm</Description>		
+                    <Order>1</Order>		
+                </SynchronousCommand>		
+ 		
+            </FirstLogonCommands>
         </component>
     </settings>
     <settings pass="offlineServicing">

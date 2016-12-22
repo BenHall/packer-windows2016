@@ -19,7 +19,8 @@
 		 [ "-cpu", "Westmere" ]
             ],
             "floppy_files": [
-                "Autounattend.xml"
+                "Autounattend.xml",
+                "enable-winrm.ps1"
             ],
             "iso_url":              "{{user `iso_path`}}",
             "iso_checksum_type":    "md5",
